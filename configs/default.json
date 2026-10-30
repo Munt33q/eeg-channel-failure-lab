@@ -1,0 +1,15 @@
+﻿{
+  "dataset": "PhysioNet EEGMMIDB v1.0.0",
+  "subjects": [1, 2, 3, 4, 5],
+  "fit_runs": [4, 8],
+  "held_out_run": 12,
+  "labels": {"T1": 0, "T2": 1},
+  "channels": ["FC3", "FCz", "FC4", "C3", "Cz", "C4", "CP3", "CPz", "CP4"],
+  "sfreq_hz": 160.0,
+  "reference": "common_average",
+  "filter": {"type": "butterworth_sos_causal", "order": 4, "bandpass_hz": [8.0, 30.0]},
+  "epoch": {"start_s": 1.0, "end_s": 3.0},
+  "model": {"csp_components": 4, "csp_reg": "ledoit_wolf", "csp_log": true, "csp_norm_trace": false, "lda_solver": "lsqr", "lda_shrinkage": "auto"},
+  "failure_grids": {"noise_sd_uv": [0.0, 5.0, 10.0, 20.0, 50.0], "gain": [0.0, 0.25, 0.5, 1.0, 2.0, 4.0], "noise_seeds": [7, 19, 42]},
+  "units": {"internal": "V", "display_and_failure_severity": "uV"}
+}

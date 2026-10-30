@@ -10,6 +10,7 @@ Examples:
 from __future__ import annotations
 
 import argparse
+from itertools import combinations
 import json
 import sys
 from pathlib import Path
@@ -96,9 +97,12 @@ def main() -> None:
             for ch in CHANNEL_ORDER:
                 specs.append(CorruptionSpec(FLAT, (ch,), seed=42))
                 for sev in (5.0, 10.0, 20.0, 50.0):
-                    specs.append(CorruptionSpec(NOISE, (ch,), severity=sev, seed=42))
+                    for seed in args.seeds:
+                        specs.append(CorruptionSpec(NOISE, (ch,), severity=sev, seed=seed))
                 for gain in (0.0, 0.25, 0.5, 2.0, 4.0):
                     specs.append(CorruptionSpec(GAIN, (ch,), severity=gain, seed=42))
+            for a, b in combinations(CHANNEL_ORDER, 2):
+                specs.append(CorruptionSpec(SWAP, (a, b), seed=42))
             df = sensitivity_sweep(eval_run, model, specs, train_labels)
             if "subject_id" not in df.columns:
                 df.insert(0, "subject_id", subj)
@@ -118,7 +122,7 @@ def main() -> None:
 
         print(f"subject {subj} done")
 
-    tag = f"{args.failure}" + ("_sweep" if args.sweep else "")
+    tag = "full_sweep" if args.sweep else str(args.failure)
     metrics_path = out / f"metrics_{tag}.csv"
     metrics_path.write_text(metrics_csv(all_metric_rows), encoding="utf-8")
     cfg = {
@@ -135,6 +139,33 @@ def main() -> None:
     (out / f"config_{tag}.json").write_text(config_json(cfg), encoding="utf-8")
     if all_preds:
         pd.concat(all_preds).to_csv(out / f"predictions_{tag}.csv", index=False)
+    if args.sweep:
+        df_all = pd.DataFrame(all_metric_rows)
+        df_all["failure_type"] = df_all["spec"].map(lambda s: s["failure_type"])
+        df_all["channel_a"] = df_all["spec"].map(lambda s: s["channels"][0])
+        df_all["channel_b"] = df_all["spec"].map(lambda s: s["channels"][1] if len(s["channels"]) > 1 else "")
+        df_all["severity_value"] = df_all["spec"].map(lambda s: s.get("severity"))
+        group_cols = ["subject_id", "failure_type", "channel_a", "channel_b", "severity_value"]
+        summary = df_all.groupby(group_cols, dropna=False).agg(
+            mean_accuracy_drop_pp=("accuracy_drop_pp", "mean"),
+            sd_accuracy_drop_pp=("accuracy_drop_pp", "std"),
+            mean_clean_accuracy=("clean_accuracy", "mean"),
+            mean_corrupt_accuracy=("corrupt_accuracy_all_eligible", "mean"),
+            mean_flip_rate=("flip_rate", "mean"),
+            mean_coverage=("coverage", "mean"),
+            total_prediction_failures=("prediction_failures", "sum"),
+            n_seeds=("seed", "nunique"),
+        ).reset_index()
+        summary.to_csv(out / "metrics_subject_summary.csv", index=False)
+        mean = summary.groupby(["failure_type", "channel_a", "channel_b", "severity_value"], dropna=False).agg(
+            mean_accuracy_drop_pp=("mean_accuracy_drop_pp", "mean"),
+            mean_clean_accuracy=("mean_clean_accuracy", "mean"),
+            mean_corrupt_accuracy=("mean_corrupt_accuracy", "mean"),
+            mean_flip_rate=("mean_flip_rate", "mean"),
+            mean_coverage=("mean_coverage", "mean"),
+            total_prediction_failures=("total_prediction_failures", "sum"),
+        ).reset_index()
+        mean.to_csv(out / "metrics_unweighted_subject_mean.csv", index=False)
     print(f"wrote {metrics_path}")
 
 

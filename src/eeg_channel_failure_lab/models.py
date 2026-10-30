@@ -17,6 +17,7 @@ from typing import Any
 
 import numpy as np
 from mne.decoding import CSP
+from scipy.special import expit
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 
 from .preprocessing import (
@@ -169,9 +170,10 @@ class RestoredModel:
 
     def predict_proba1(self, X: np.ndarray) -> np.ndarray:
         d = (self.lda_coef @ self._features(X).T + self.lda_intercept).ravel()
-        # Gaussian LDA posterior with shared covariance (lsqr shrinkage):
-        p1 = 1.0 / (1.0 + np.exp(-(2.0 * d)))  # monotone map of the decision
-        return p1
+        # sklearn's binary LDA uses sigmoid(decision_function), not a doubled
+        # decision value. These are decision probabilities, not calibrated
+        # confidence estimates.
+        return expit(d)
 
 
 def provenance_metadata(

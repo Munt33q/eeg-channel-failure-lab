@@ -146,6 +146,11 @@ class TestUnits:
 
 
 class TestPreprocessing:
+    def test_raw_run_data_is_immutable(self):
+        run = make_run(make_data())
+        with pytest.raises(ValueError):
+            run.data_v[0, 0] = 0.0
+
     def test_channel_order_mismatch_rejected(self):
         data = make_data()
         make_run(data)

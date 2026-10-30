@@ -79,27 +79,26 @@ def run_single_experiment(
     corrupt_v = corrupt_uv * 1e-6
     corrupt_trials = preprocess_run(run, corrupted=corrupt_v)
 
-    # Identical eligible trial IDs as clean (frozen eligibility).
-    if not np.array_equal(
-        clean_trials.loc[elig, "trial_id"].to_numpy(),
-        corrupt_trials.loc[corrupt_trials["eligible"].to_numpy(), "trial_id"].to_numpy(),
-    ):
-        # Eligibility is frozen from clean checks, so corrupted-path reasons
-        # are recorded but never used to drop trials.
-        pass
-    X_cor, _, ids_cor = epochs_from_trials(corrupt_trials)
-    if not np.array_equal(trial_ids, ids_cor):
-        raise RuntimeError("trial ID mismatch between clean and corrupted epochs")
-
     corrupt_pred = np.full(len(y_true), -1, dtype=np.int64)
     corrupt_p1 = np.full(len(y_true), np.nan)
     ok = np.zeros(len(y_true), dtype=bool)
     if len(y_true):
-        model_valid = corrupt_trials.loc[corrupt_trials["eligible"].to_numpy(), "model_valid"].to_numpy()
-        finite_X = np.isfinite(X_cor).all(axis=(1, 2))
-        ok = model_valid & finite_X
+        # Freeze eligibility from clean data. Never use corrupted-path
+        # eligibility to drop a paired trial. Missing/invalid corrupted
+        # epochs become explicit prediction failures instead.
+        by_id = {int(row.trial_id): row for row in corrupt_trials.itertuples()}
+        cor_epochs = []
+        model_valid = []
+        for trial_id in trial_ids:
+            row = by_id.get(int(trial_id))
+            epoch = None if row is None else row.epoch
+            cor_epochs.append(epoch)
+            model_valid.append(bool(row is not None and row.model_valid and epoch is not None))
+        finite_rows = [e is not None and np.isfinite(e).all() for e in cor_epochs]
+        ok = np.asarray(model_valid, dtype=bool) & np.asarray(finite_rows, dtype=bool)
         if ok.any():
-            p, pr = models_mod.predict(model, X_cor[ok])
+            X_cor_valid = np.stack([cor_epochs[i] for i in np.flatnonzero(ok)]).astype(np.float64)
+            p, pr = models_mod.predict(model, X_cor_valid)
             corrupt_pred[ok] = p
             corrupt_p1[ok] = pr
 
@@ -127,5 +126,8 @@ def sensitivity_sweep(
     rows = []
     for spec in specs:
         tf = run_single_experiment(run, model, spec, train_labels)
-        rows.append(tf.metrics)
+        row = dict(tf.metrics)
+        row["failure_type"] = spec.failure_type
+        row["seed"] = spec.seed
+        rows.append(row)
     return pd.DataFrame(rows)

@@ -52,6 +52,7 @@ def standalone_html(
     sections: list[tuple[str, str]],  # (heading, html_body)
     metadata: dict[str, Any],
     figures: list[tuple[str, "object"]] | None = None,
+    is_synthetic: bool = False,
 ) -> str:
     """Build a self-contained HTML report (no external dependencies)."""
     figs_html = ""
@@ -69,6 +70,7 @@ def standalone_html(
     body_sections = "".join(f"<section><h2>{esc(h)}</h2>{b}</section>" for h, b in sections)
 
     now = datetime.now(timezone.utc).isoformat()
+    banner = '<div class="banner">Synthetic demonstration — not evidence of performance on human EEG.</div>' if is_synthetic else ""
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,6 +96,7 @@ def standalone_html(
 <h1>{esc(title)}</h1>
 <div class="banner">Synthetic demonstration — not evidence of performance on human EEG (applies to synthetic-mode reports).</div>
 <p>Generated {esc(now)} by eeg-channel-failure-lab.</p>
+{banner}
 {body_sections}
 {figs_html}
 <section><h2>Run metadata</h2>

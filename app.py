@@ -12,7 +12,10 @@ The same core package functions power the CLI and this app.
 from __future__ import annotations
 
 import sys
+import os
 from pathlib import Path
+
+os.environ.setdefault("MPLBACKEND", "Agg")
 
 import numpy as np
 import pandas as pd
@@ -110,7 +113,6 @@ def load_synth_runs(seed: int) -> dict[int, RunData]:
     return synth.make_synthetic_subject(seed)
 
 
-@st.cache_data(show_spinner="Running experiment…")
 def cached_experiment(
     runs_key: int,
     subject: int,
@@ -426,7 +428,6 @@ def compute_sensitivity(runs: dict, model, subject: int) -> pd.DataFrame:
     return df
 
 
-@st.cache_data(show_spinner="Running sensitivity sweep (channel × severity)…")
 def cached_sensitivity(subject: int, mode: str, seed: int, runs_key: int) -> pd.DataFrame:
     return compute_sensitivity(st.session_state["runs"], st.session_state["model"], subject)
 
@@ -528,12 +529,8 @@ def tab_export(controls: dict) -> None:
             "evaluation_split": "held-out run 12; training runs 4+8",
             "model": "CSP(4, ledoit_wolf, log) + LDA(lsqr, shrinkage auto)",
         },
+        is_synthetic=controls["mode"] == "Synthetic",
     )
-    if controls["mode"] != "Synthetic":
-        html_text = html_text.replace(
-            '<div class="banner">Synthetic demonstration — not evidence of performance on human EEG (applies to synthetic-mode reports).</div>',
-            "",
-        )
     st.download_button("Standalone HTML report", html_text, "report.html", "text/html")
 
 

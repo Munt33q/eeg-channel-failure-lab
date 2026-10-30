@@ -100,6 +100,10 @@ class RunData:
     descriptions: tuple[str, ...] = field(default_factory=tuple)
 
     def __post_init__(self) -> None:
+        self.data_v = np.array(self.data_v, dtype=np.float64, copy=True)
+        self.data_v.setflags(write=False)
+        self.event_samples = np.array(self.event_samples, dtype=np.int64, copy=True)
+        self.labels = np.array(self.labels, dtype=np.int64, copy=True)
         validate_channel_names(self.channel_names)
         if self.data_v.ndim != 2 or self.data_v.shape[0] != len(self.channel_names):
             raise ValueError("data must be [channels, samples] matching channel_names")

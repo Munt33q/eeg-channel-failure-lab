@@ -47,12 +47,10 @@ class TestArtifacts:
         p_pipe, pr_pipe = models_mod.predict(model, X)
         p_res = restored.predict(X)
         pr_res = restored.predict_proba1(X)
-        # Labels must match exactly; probabilities are a monotone map, so
-        # their ordering must agree with the pipeline's.
+        # Numeric artifact restoration must preserve both labels and the
+        # sklearn LDA probability output exactly.
         assert np.array_equal(p_pipe, p_res)
-        order_pipe = np.argsort(pr_pipe)
-        order_res = np.argsort(pr_res)
-        assert np.array_equal(order_pipe, order_res)
+        assert np.allclose(pr_pipe, pr_res, rtol=1e-10, atol=1e-12)
 
     def test_contract_mismatch_rejected(self, trained):
         out, _, _ = trained
