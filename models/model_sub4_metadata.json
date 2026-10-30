@@ -1,0 +1,95 @@
+{
+  "project": "eeg-channel-failure-lab",
+  "artifact_format_version": 1,
+  "subject_id": 4,
+  "fit_runs": [
+    4,
+    8
+  ],
+  "eval_run": 12,
+  "seed": 42,
+  "train_trial_ids": {
+    "4": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "8": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  "package_versions": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "mne": "1.13.2",
+    "joblib": "1.6.0",
+    "matplotlib": "3.11.2",
+    "streamlit": "1.66.1"
+  },
+  "saved_at_utc": "2026-10-30T13:41:01.218373+00:00",
+  "contract": {
+    "channels": [
+      "FC3",
+      "FCz",
+      "FC4",
+      "C3",
+      "Cz",
+      "C4",
+      "CP3",
+      "CPz",
+      "CP4"
+    ],
+    "sfreq_hz": 160.0,
+    "epoch_start_s": 1.0,
+    "epoch_end_s": 3.0,
+    "samples_per_epoch": 320,
+    "bandpass_hz": [
+      8.0,
+      30.0
+    ],
+    "filter_order": 4,
+    "labels": [
+      0,
+      1
+    ],
+    "referencing": "common average across the nine contract channels",
+    "csp": {
+      "n_components": 4,
+      "reg": "ledoit_wolf",
+      "log": true,
+      "norm_trace": false
+    },
+    "lda": {
+      "solver": "lsqr",
+      "shrinkage": "auto"
+    }
+  }
+}

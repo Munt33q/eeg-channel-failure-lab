@@ -15,3 +15,9 @@ assets/*.png
 assets/*.gif
 !assets/.gitkeep
 !results/.gitkeep
+!models/model_sub*.npz
+!models/model_sub*_metadata.json
+!results/metrics_subject_summary.csv
+!results/metrics_unweighted_subject_mean.csv
+!results/config_full_sweep.json
+!assets/signal_comparison.png

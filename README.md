@@ -44,7 +44,7 @@ Tested with Python 3.13.14 on Windows (PowerShell); any Python ≥3.11 with
 current package versions should work.
 
 ```powershell
-git clone <this-repo>
+git clone https://github.com/YOUR_USERNAME/eeg-channel-failure-lab.git
 cd eeg-channel-failure-lab
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e ".[dev]"
@@ -53,7 +53,14 @@ python -m venv .venv
 
 The app opens in **Synthetic** mode: fully offline, no credentials, prominently
 labeled as a demonstration. Switch to **Real data** mode after running the
-pipeline below.## Failure definitions
+pipeline below.
+
+The repository includes small project-produced numeric model artifacts and
+summary result files. Raw EDF recordings are never included; Real-data mode
+requires the PhysioNet download step below. Replace `YOUR_USERNAME` in the
+clone command with the GitHub account that hosts this repository.
+
+## Failure definitions
 
 | Failure | What happens | Notes |
 |---|---|---|

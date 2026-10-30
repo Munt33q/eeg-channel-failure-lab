@@ -1,0 +1,40 @@
+{
+  "channel": null,
+  "channel_order": [
+    "FC3",
+    "FCz",
+    "FC4",
+    "C3",
+    "Cz",
+    "C4",
+    "CP3",
+    "CPz",
+    "CP4"
+  ],
+  "channels": null,
+  "failure": null,
+  "package_versions": {
+    "joblib": "1.6.0",
+    "matplotlib": "3.11.2",
+    "mne": "1.13.2",
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "streamlit": "1.66.1"
+  },
+  "seeds": [
+    7,
+    19,
+    42
+  ],
+  "severity": null,
+  "subjects": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "sweep": true
+}
