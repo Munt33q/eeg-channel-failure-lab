@@ -1,0 +1,344 @@
+{
+  "subjects": {
+    "1": {
+      "4": {
+        "subject_id": 1,
+        "run_id": 4,
+        "sfreq_hz": 160.0,
+        "n_channels": 9,
+        "channel_names": [
+          "FC3",
+          "FCz",
+          "FC4",
+          "C3",
+          "Cz",
+          "C4",
+          "CP3",
+          "CPz",
+          "CP4"
+        ],
+        "n_events": 15,
+        "label_counts": {
+          "0": 8,
+          "1": 7
+        }
+      },
+      "8": {
+        "subject_id": 1,
+        "run_id": 8,
+        "sfreq_hz": 160.0,
+        "n_channels": 9,
+        "channel_names": [
+          "FC3",
+          "FCz",
+          "FC4",
+          "C3",
+          "Cz",
+          "C4",
+          "CP3",
+          "CPz",
+          "CP4"
+        ],
+        "n_events": 15,
+        "label_counts": {
+          "0": 8,
+          "1": 7
+        }
+      },
+      "12": {
+        "subject_id": 1,
+        "run_id": 12,
+        "sfreq_hz": 160.0,
+        "n_channels": 9,
+        "channel_names": [
+          "FC3",
+          "FCz",
+          "FC4",
+          "C3",
+          "Cz",
+          "C4",
+          "CP3",
+          "CPz",
+          "CP4"
+        ],
+        "n_events": 15,
+        "label_counts": {
+          "0": 7,
+          "1": 8
+        }
+      }
+    },
+    "2": {
+      "4": {
+        "subject_id": 2,
+        "run_id": 4,
+        "sfreq_hz": 160.0,
+        "n_channels": 9,
+        "channel_names": [
+          "FC3",
+          "FCz",
+          "FC4",
+          "C3",
+          "Cz",
+          "C4",
+          "CP3",
+          "CPz",
+          "CP4"
+        ],
+        "n_events": 15,
+        "label_counts": {
+          "0": 7,
+          "1": 8
+        }
+      },
+      "8": {
+        "subject_id": 2,
+        "run_id": 8,
+        "sfreq_hz": 160.0,
+        "n_channels": 9,
+        "channel_names": [
+          "FC3",
+          "FCz",
+          "FC4",
+          "C3",
+          "Cz",
+          "C4",
+          "CP3",
+          "CPz",
+          "CP4"
+        ],
+        "n_events": 15,
+        "label_counts": {
+          "0": 8,
+          "1": 7
+        }
+      },
+      "12": {
+        "subject_id": 2,
+        "run_id": 12,
+        "sfreq_hz": 160.0,
+        "n_channels": 9,
+        "channel_names": [
+          "FC3",
+          "FCz",
+          "FC4",
+          "C3",
+          "Cz",
+          "C4",
+          "CP3",
+          "CPz",
+          "CP4"
+        ],
+        "n_events": 15,
+        "label_counts": {
+          "0": 8,
+          "1": 7
+        }
+      }
+    },
+    "3": {
+      "4": {
+        "subject_id": 3,
+        "run_id": 4,
+        "sfreq_hz": 160.0,
+        "n_channels": 9,
+        "channel_names": [
+          "FC3",
+          "FCz",
+          "FC4",
+          "C3",
+          "Cz",
+          "C4",
+          "CP3",
+          "CPz",
+          "CP4"
+        ],
+        "n_events": 15,
+        "label_counts": {
+          "0": 8,
+          "1": 7
+        }
+      },
+      "8": {
+        "subject_id": 3,
+        "run_id": 8,
+        "sfreq_hz": 160.0,
+        "n_channels": 9,
+        "channel_names": [
+          "FC3",
+          "FCz",
+          "FC4",
+          "C3",
+          "Cz",
+          "C4",
+          "CP3",
+          "CPz",
+          "CP4"
+        ],
+        "n_events": 15,
+        "label_counts": {
+          "0": 7,
+          "1": 8
+        }
+      },
+      "12": {
+        "subject_id": 3,
+        "run_id": 12,
+        "sfreq_hz": 160.0,
+        "n_channels": 9,
+        "channel_names": [
+          "FC3",
+          "FCz",
+          "FC4",
+          "C3",
+          "Cz",
+          "C4",
+          "CP3",
+          "CPz",
+          "CP4"
+        ],
+        "n_events": 15,
+        "label_counts": {
+          "0": 8,
+          "1": 7
+        }
+      }
+    },
+    "4": {
+      "4": {
+        "subject_id": 4,
+        "run_id": 4,
+        "sfreq_hz": 160.0,
+        "n_channels": 9,
+        "channel_names": [
+          "FC3",
+          "FCz",
+          "FC4",
+          "C3",
+          "Cz",
+          "C4",
+          "CP3",
+          "CPz",
+          "CP4"
+        ],
+        "n_events": 15,
+        "label_counts": {
+          "0": 8,
+          "1": 7
+        }
+      },
+      "8": {
+        "subject_id": 4,
+        "run_id": 8,
+        "sfreq_hz": 160.0,
+        "n_channels": 9,
+        "channel_names": [
+          "FC3",
+          "FCz",
+          "FC4",
+          "C3",
+          "Cz",
+          "C4",
+          "CP3",
+          "CPz",
+          "CP4"
+        ],
+        "n_events": 15,
+        "label_counts": {
+          "0": 7,
+          "1": 8
+        }
+      },
+      "12": {
+        "subject_id": 4,
+        "run_id": 12,
+        "sfreq_hz": 160.0,
+        "n_channels": 9,
+        "channel_names": [
+          "FC3",
+          "FCz",
+          "FC4",
+          "C3",
+          "Cz",
+          "C4",
+          "CP3",
+          "CPz",
+          "CP4"
+        ],
+        "n_events": 15,
+        "label_counts": {
+          "0": 8,
+          "1": 7
+        }
+      }
+    },
+    "5": {
+      "4": {
+        "subject_id": 5,
+        "run_id": 4,
+        "sfreq_hz": 160.0,
+        "n_channels": 9,
+        "channel_names": [
+          "FC3",
+          "FCz",
+          "FC4",
+          "C3",
+          "Cz",
+          "C4",
+          "CP3",
+          "CPz",
+          "CP4"
+        ],
+        "n_events": 15,
+        "label_counts": {
+          "0": 7,
+          "1": 8
+        }
+      },
+      "8": {
+        "subject_id": 5,
+        "run_id": 8,
+        "sfreq_hz": 160.0,
+        "n_channels": 9,
+        "channel_names": [
+          "FC3",
+          "FCz",
+          "FC4",
+          "C3",
+          "Cz",
+          "C4",
+          "CP3",
+          "CPz",
+          "CP4"
+        ],
+        "n_events": 15,
+        "label_counts": {
+          "0": 7,
+          "1": 8
+        }
+      },
+      "12": {
+        "subject_id": 5,
+        "run_id": 12,
+        "sfreq_hz": 160.0,
+        "n_channels": 9,
+        "channel_names": [
+          "FC3",
+          "FCz",
+          "FC4",
+          "C3",
+          "Cz",
+          "C4",
+          "CP3",
+          "CPz",
+          "CP4"
+        ],
+        "n_events": 15,
+        "label_counts": {
+          "0": 7,
+          "1": 8
+        }
+      }
+    }
+  }
+}
